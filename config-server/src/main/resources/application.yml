@@ -1,0 +1,22 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/MelnikovStas/ms-config-properties.git  # ваш репозиторий
+          default-label: main  # или master, если у вас старая ветка
+          search-paths:
+            - 'config-client/{profile}'  # {profile} заменится на dev/test/master
+            - 'config-client'            # дополнительный путь (если нужно)
+          clone-on-start: true
+          force-pull: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
