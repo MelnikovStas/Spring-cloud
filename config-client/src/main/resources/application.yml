@@ -1,0 +1,27 @@
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30
+
+spring:
+  application:
+    name: config-client
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: config-server
+      uri: http://localhost:8888
+      profile: dev
+
+
+server:
+  port: 8887
